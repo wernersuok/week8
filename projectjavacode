@@ -1,0 +1,116 @@
+package com.example.week8;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import org.w3c.dom.Text;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+
+    public void sum(View v) {
+        TextView t1 = findViewById(R.id.inputFirstNumber);
+        String input1 = t1.getText().toString();
+
+        TextView t2 = findViewById(R.id.inputSecondNumber);
+        String input2 = t2.getText().toString();
+
+        try {
+            int number1 = Integer.parseInt(input1);
+            int number2 = Integer.parseInt(input2);
+            int result = number1 + number2;
+
+            TextView resultsTextView = findViewById(R.id.textResult);
+            resultsTextView.setText(String.valueOf(result));
+        } catch (NumberFormatException e) {
+            ((TextView)findViewById(R.id.textResult)).setText("invalid input");
+            Log.e("calculator", "error with addition input", e);
+        }
+    }
+
+    public void subtract(View v) {
+        TextView t1 = findViewById(R.id.inputFirstNumber);
+        String input1 = t1.getText().toString();
+
+        TextView t2 = findViewById(R.id.inputSecondNumber);
+        String input2 = t2.getText().toString();
+
+        try {
+            int number1 = Integer.parseInt(input1);
+            int number2 = Integer.parseInt(input2);
+            int result = number1 - number2;
+
+            String resultString = String.valueOf(result);
+            TextView resultTextView = findViewById(R.id.textResult);
+            resultTextView.setText(resultString);
+        } catch (NumberFormatException e) {
+            TextView errorText = findViewById(R.id.textResult);
+            errorText.setText("invalid input");
+            Log.d("calculator", "error with subtraction input", e);
+        }
+    }
+
+    public void multiply(View v) {
+        TextView t1 = findViewById(R.id.inputFirstNumber);
+        String input1 = t1.getText().toString();
+
+        TextView t2 = findViewById(R.id.inputSecondNumber);
+        String input2 = t2.getText().toString();
+
+        try {
+            int number1 = Integer.parseInt(input1);
+            int number2 = Integer.parseInt(input2);
+            int result = number1 * number2;
+
+            String resultString = String.valueOf(result);
+            TextView resultTextView = findViewById(R.id.textResult);
+            resultTextView.setText(resultString);
+        } catch (NumberFormatException e) {
+            TextView resultTextView = findViewById(R.id.textResult);
+            resultTextView.setText("invalid input");
+            Log.d("calculator", "error with multiplication input", e);
+        }
+    }
+
+    public void divide(View v) {
+        TextView t1 = findViewById(R.id.inputFirstNumber);
+        String input1 = t1.getText().toString();
+
+        TextView t2 = findViewById(R.id.inputSecondNumber);
+        String input2 = t2.getText().toString();
+
+        try {
+            int number1 = Integer.parseInt(input1);
+            int number2 = Integer.parseInt(input2);
+            int result = number1 / number2;
+
+            String resultString = String.valueOf(result);
+
+            TextView resultTextView = findViewById(R.id.textResult);
+            resultTextView.setText(resultString);
+        } catch (NumberFormatException e) {
+            TextView resultTextView = findViewById(R.id.textResult);
+            resultTextView.setText("invalid input");
+            Log.d("calculator", "error with division input", e);
+        }
+    }
+}
